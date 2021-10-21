@@ -1,4 +1,10 @@
 Jinja2
 neo4j
 termcolor
-tornado
+fastapi
+SQLAlchemy
+alembic
+python-multipart
+uvicorn[standard]
+python-jose[cryptography]
+passlib[bcrypt]

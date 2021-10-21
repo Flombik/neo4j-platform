@@ -1,8 +1,6 @@
 import configparser
 import os
 
-from typing import KeysView
-
 
 class Config:
 
@@ -17,8 +15,17 @@ class Config:
         except KeyError:
             return default
 
-    def get_cookie_secret(self) -> str:
-        return self._get_safe_value("tornado", "cookie_secret", "")
+    def get_secret(self) -> str:
+        return self._get_safe_value("fastapi", "secret", "")
+
+    def get_host(self) -> str:
+        return self._get_safe_value("fastapi", "host", "127.0.0.1")
+
+    def get_port(self) -> int:
+        return int(self._get_safe_value("fastapi", "port", "5000"))
+
+    def get_db_address(self) -> str:
+        return self._get_safe_value("fastapi", "sql", "sqlite:///./sql_app.db")
 
     def get_path_to_sc_config(self) -> str:
         path = self._get_safe_value("sc", "config", "")
@@ -26,3 +33,9 @@ class Config:
             return path
 
         return os.path.normpath(os.path.join(os.path.dirname(self._path), path))
+
+    def init_env(self):
+        os.environ['SECRET_KEY'] = self.get_secret()
+        os.environ['SERVER_HOST'] = self.get_host()
+        os.environ['SERVER_PORT'] = str(self.get_port())
+        os.environ['SQLALCHEMY_DATABASE_URL'] = self.get_db_address()

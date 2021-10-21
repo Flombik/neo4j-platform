@@ -2,5 +2,10 @@
 # cookie secret in tornado
 cookie_secret = <random generated value>
 
+[fastapi]
+secret = <random generated value>
+host = 127.0.0.1
+port = 5000
+
 [sc]
 config = ../../db/config.ini
