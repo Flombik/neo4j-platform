@@ -3,6 +3,7 @@ import os
 
 
 def main():
+    # pylint: disable=import-outside-toplevel
     parser = argparse.ArgumentParser(
         description="Initialize database with core elements"
     )

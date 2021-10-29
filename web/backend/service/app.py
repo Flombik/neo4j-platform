@@ -5,6 +5,7 @@ from flask import Flask, jsonify
 
 
 def create_app(test_config: Optional[dict] = None) -> Flask:
+    # pylint: disable=import-outside-toplevel, too-many-locals
     app = Flask(__name__, static_folder="staticfiles")
 
     from flask_cors import CORS
