@@ -1,15 +1,14 @@
-import configparser
 import os
 
-from typing import KeysView
+import rtoml
 
 
 class Config:
 
     def __init__(self, path) -> None:
         self._path = path
-        self._config = configparser.ConfigParser()
-        self._config.read(path)
+        with open(path, 'r', encoding='utf-8') as f:
+            self._config = rtoml.load(f)
 
     def _get_safe_value(self, section: str, key: str, default: str = "") -> str:
         try:
